@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minnan reseptikokoelma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --lavender: #e6e6fa;
+            --light-pink: #ffb6c1;
+            --medium-pink: #ff91a4;
+            --dark-pink: #d87093;
+            --light-purple: #d8bfd8;
+            --text-dark: #5d3954;
+            --text-light: #7a5c75;
+            --white: #fffafa;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--lavender) 0%, var(--light-pink) 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--dark-pink) 0%, var(--light-purple) 100%);
+            color: var(--white);
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(216, 112, 147, 0.3);
+            border-bottom: 3px solid var(--medium-pink);
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .search-section {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(216, 112, 147, 0.2);
+            margin-bottom: 2rem;
+            border: 2px solid var(--light-purple);
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid var(--lavender);
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: var(--white);
+            color: var(--text-dark);
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--medium-pink);
+            box-shadow: 0 0 0 3px rgba(255, 145, 164, 0.3);
+        }
+        
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--lavender);
+        }
+        
+        .filter-btn {
+            background: var(--lavender);
+            color: var(--text-dark);
+            border: 2px solid var(--light-purple);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover {
+            background: var(--light-purple);
+            transform: translateY(-2px);
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--medium-pink) 0%, var(--dark-pink) 100%);
+            color: var(--white);
+            border-color: var(--dark-pink);
+        }
+        
+        button {
+            background: linear-gradient(135deg, var(--medium-pink) 0%, var(--dark-pink) 100%);
+            color: var(--white);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(216, 112, 147, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(216, 112, 147, 0.4);
+        }
+        
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .recipe-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(216, 112, 147, 0.2);
+            transition: all 0.3s ease;
+            border: 2px solid var(--light-purple);
+            position: relative;
+        }
+        
+        .recipe-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(216, 112, 147, 0.3);
+        }
+        
+        .recipe-category {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--dark-pink);
+            border: 1px solid var(--medium-pink);
+        }
+        
+        .recipe-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .recipe-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent);
+        }
+        
+        .recipe-content {
+            padding: 1.5rem;
+        }
+        
+        .recipe-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--lavender);
+            padding-bottom: 0.5rem;
+        }
+        
+        .recipe-description {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .add-to-list-btn {
+            background: linear-gradient(135deg, #8a2be2 0%, #9370db 100%);
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .add-to-list-btn:hover {
+            background: linear-gradient(135deg, #7b1fa2 0%, #8367c7 100%);
+        }
+
+        .show-instructions-btn {
+            background: linear-gradient(135deg, var(--light-purple) 0%, #ba68c8 100%);
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .show-instructions-btn:hover {
+            background: linear-gradient(135deg, #ab47bc 0%, #8e24aa 100%);
+        }
+        
+        .grocery-list-section {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(216, 112, 147, 0.2);
+            border: 2px solid var(--light-purple);
+        }
+        
+        .grocery-list-section h2 {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--lavender);
+            padding-bottom: 0.5rem;
+        }
+        
+        #grocery-list {
+            list-style-type: none;
+        }
+        
+        .grocery-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background-color: var(--lavender);
+            border-radius: 8px;
+            border-left: 4px solid var(--medium-pink);
+            transition: all 0.2s ease;
+        }
+        
+        .grocery-item:hover {
+            background-color: var(--light-purple);
+            transform: translateX(5px);
+        }
+
+        .grocery-item-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .grocery-item-name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .grocery-item-amount {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+        
+        .delete-btn {
+            background-color: var(--dark-pink);
+            color: var(--white);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+        
+        .delete-btn:hover {
+            background-color: #c25a7c;
+            transform: scale(1.05);
+        }
+        
+        .empty-list {
+            text-align: center;
+            color: var(--text-light);
+            padding: 2rem;
+            font-style: italic;
+            background-color: var(--lavender);
+            border-radius: 8px;
+        }
+        
+        .clear-list-btn {
+            background: linear-gradient(135deg, #ff6b88 0%, #ff4757 100%);
+            width: 100%;
+            padding: 12px;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        
+        .clear-list-btn:hover {
+            background: linear-gradient(135deg, #e55067 0%, #ff3742 100%);
+        }
+
+        /* Ohjenäkymän tyylit */
+        .recipe-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .recipe-modal-content {
+            background: var(--white);
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 3px solid var(--light-purple);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--dark-pink);
+            background: none;
+            border: none;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal:hover {
+            color: var(--medium-pink);
+            transform: scale(1.1);
+        }
+
+        .recipe-instructions {
+            margin-top: 1.5rem;
+        }
+
+        .recipe-instructions h3 {
+            color: var(--dark-pink);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--lavender);
+            padding-bottom: 0.5rem;
+        }
+
+        .instruction-steps {
+            list-style-type: none;
+            counter-reset: step-counter;
+            padding: 0;
+        }
+
+        .instruction-step {
+            counter-increment: step-counter;
+            margin-bottom: 1rem;
+            padding-left: 3.2rem;
+            position: relative;
+            line-height: 1.6;
+            padding: 10px 10px 10px 3.2rem;
+            background: var(--lavender);
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+        }
+
+        .instruction-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--medium-pink) 0%, var(--dark-pink) 100%);
+            color: var(--white);
+            width: 1.8rem;
+            height: 1.8rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .modal-recipe-image {
+            height: 200px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            margin: 1rem 0;
+        }
+
+        .ingredients-with-amounts {
+            background: var(--lavender);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .ingredients-with-amounts h4 {
+            color: var(--dark-pink);
+            margin-bottom: 0.5rem;
+        }
+
+        .amount-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .amount-list li {
+            padding: 5px 0;
+            border-bottom: 1px solid var(--light-purple);
+        }
+        
+        header::before {
+            content: '🌸';
+            font-size: 2rem;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            opacity: 0.8;
+        }
+        
+        header::after {
+            content: '💮';
+            font-size: 2rem;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .recipe-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-box {
+                flex-direction: column;
+            }
+            
+            .category-filters {
+                justify-content: center;
+            }
+            
+            header::before, header::after {
+                display: none;
+            }
+
+            .recipe-modal-content {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Minnan reseptikokoelma</h1>
+    </header>
+    
+    <div class="container">
+        <section class="search-section">
+            <h2>Etsi Reseptejä</h2>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Etsi reseptejä...">
+                <button id="search-btn">Etsi</button>
+            </div>
+            
+            <div class="category-filters">
+                <button class="filter-btn active" data-category="kaikki">Kaikki</button>
+                <button class="filter-btn" data-category="pääruoka">Pääruoka</button>
+                <button class="filter-btn" data-category="jälkiruoka">Jälkiruoka</button>
+                <button class="filter-btn" data-category="kasvisruoka">Kasvisruoka</button>
+                <button class="filter-btn" data-category="alkupala">Alkupala</button>
+                <button class="filter-btn" data-category="leivonnainen">Leivonnainen</button>
+                <button class="filter-btn" data-category="aasialainen">Aasialainen</button>
+            </div>
+        </section>
+        
+        <section class="recipes-section">
+            <h2>Reseptit</h2>
+            <div class="recipe-grid" id="recipe-container">
+                <!-- Reseptit lisätään tähän dynaamisesti -->
+            </div>
+        </section>
+        
+        <section class="grocery-list-section">
+            <h2>🛒 Ostoslista</h2>
+            <ul id="grocery-list">
+                <li class="empty-list">Ostoslistasi on tyhjä. Lisää aineksia resepteistä!</li>
+            </ul>
+            <button class="clear-list-btn" id="clear-list-btn">Tyhjennä koko lista</button>
+        </section>
+    </div>
+
+    <!-- Ohjenäkymä -->
+    <div id="recipe-modal" class="recipe-modal">
+        <div class="recipe-modal-content">
+            <button class="close-modal">&times;</button>
+            <div id="modal-recipe-content">
+                <!-- Ohjeet tulevat tähän dynaamisesti -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Reseptidata kategorioineen, ohjeineen ja määrineen
+        const recipes = [
+            {
+                id: 1,
+                title: "牛丼",
+                description: "x minuuttia",
+                ingredientAmounts: [
+                    "200g udon",
+                    "200g ohut naudan suikale",
+                    "600ml dashi",
+                    "1,5rkl soijakastike",
+                    "1 rkl mirin",
+                    "1 tl sokeri",
+                    "1 tl suola"
+                ],
+                categories: ["pääruoka", "aasialainen"],
+                image: "https://upload.wikimedia.org/wikipedia/commons/4/45/Gyuu-don_001.jpg",
+                instructions: [
+                    "Keitä dashi, soijakastike, mirin, sokeri ja suola.",
+                    "Paista lihat ja kevätsipuli rapeaksi pannulla.",
+                    "Keitä nuudelit.",
+                    "Yhdistä liemi nuudelit ja liha kulhoon"
+                ]
+            },
+            {
+                id: 2,
+                title: "Hot honey halloumi-pasta",
+                description: "15 minuuttia",
+                ingredientAmounts: [
+                    "200g halloumi",
+                    "200g tuorepasta",
+                    "2dl kerma",
+                    "chilihiutale",
+                    "tomaattipyre",
+                    "kasvisliemikuutio",
+                    "hunaja",
+                    "valkosipuli",
+                    "valkosipulijauhe",
+                    "pippuri"
+                ],
+                categories: ["pääruoka", "kasvisruoka"],
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgYZRn9_QqODOVIbP-qESltgyiQaKZO6-j8Q&s",
+                instructions: [
+                    "Kuutioi halloumi ja paista pinta rapeaksi.",
+                    "Lisää mausteet, tomaattipyre, hunaja ja kerma.",
+                    "Keitä pasta."
+                ]
+            },
+            {
+                id: 3,
+                title: "Kasviswokki",
+                description: "15 minuuttia",
+                ingredientAmounts: [
+                    "200g kiinankaali",
+                    "30g kevätsipuli",
+                    "2 porkkanaa",
+                    "200g munanuudeli",
+                    "Golden&green suikale",
+                    "sipuli",
+                    "inkivääri",
+                    "valkosipuli",
+                    "soijakastike",
+                    "valkosipulijauhe",
+                    "kasvisfondue",
+                    "hunaja",
+                    "osterikastike"
+                ],
+                categories: ["pääruoka", "kasvisruoka"],
+                image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+                instructions: [
+                    "Pilko vihannekset sopivan kokoisiksi paloiksi.",
+                    "Kuullota valkosipuli ja inkivääri seesamiöljyssä.",
+                    "Lisää goldengreen ja paista kunnes rapeaa.",
+                    "Lisää vihannekset ja wokkaa nopeasti korkealla lämmöllä.",
+                    "Mausta soijakastikkeella.",
+                    "Tarjoile heti."
+                ]
+            },
+            {
+                id: 4,
+                title: "Mapo tofu",
+                description: "15 minuuttia ja riisi",
+                ingredientAmounts: [
+                    "200g jauheliha",
+                    "400g tofu",
+                    "valkosipuli",
+                    "inkivääri",
+                    "1rkl doubanjang",
+                    "2rkl mirin",
+                    "1rkl osterikastike",
+                    "1rkl soijakastike",
+                    "1tl perunajauho",
+                    "vettä"
+                ],
+                categories: ["pääruoka", "aasialainen"],
+                image: "https://www.marionskitchen.com/wp-content/uploads/2019/08/Mapo-Tofu4-1200x1500.jpg",
+                instructions: [
+                    "Ruskista jauheliha ja lisää mausteet",
+                    "Hauduta keskilämmöllä ja lisää tofu",
+                    "Keitä riisi."
+                ]
+            },
+            {
+                id: 5,
+                title: "Omenapiirakka",
+                description: "30 min",
+                ingredientAmounts: [
+                    "3 muna",
+                    "2,5dl sokeri",
+                    "100g margariini",
+                    "1,5dl maito",
+                    "4,5dl vehnäjauho",
+                    "1,5tl leivinjauhe",
+                    "3-4 omena"
+                ],
+                categories: ["jälkiruoka", "leivonnainen"],
+                image: "https://kotiliesi.fi/suklaapossu/wp-content/uploads/sites/12/2017/09/Mehev%C3%A4-omenapiirakka-683x1024.jpg",
+                instructions: [
+                    "Pane uuni kuumenemaan 225 asteeseen ja vuoraa uunipelti leivinpaperilla.",
+                    "Kiehauta neste ja rasva.",
+                    "Vatkaa munat ja sokeri vaahdoksi.",
+                    "Lisää vaahtoon kuuma neste-rasvaseos ja jauhot, joihin on sekoitettu leivinjauhe.",
+                    "Kaada taikina pellille ja lisää pinnalle omenaviipaleet",
+                    "Paista 225°C:ssä 15-20 minuuttia.",
+                    "Anna jäähtyä ennen tarjoilua."
+                ]
+            },
+            {
+                id: 6,
+                title: "Shanghai tacot",
+                description: "2 henkilölle, 30 minuuttia",
+                ingredientAmounts: [
+                    "4 sipuliparathaleipä",
+                    "200g proteiinia esim tofua tai kanaa",
+                    "Alfalfa silmusalaatti",
+                    "salaattisekoitus",
+                    "paahdettu sipulirouhe",
+                    "hoisinkastike",
+                    "majoneesi",
+                    "sriracha",
+                    "limemehu"
+                ],
+                categories: ["pääruoka", "aasialainen"],
+                image: "https://images.deliveryhero.io/image/fd-po/Products/1046654425.jpg?width=%s",
+                instructions: [
+                    "Ruskista proteiini pannulla.",
+                    "Paista parathaleipiä hetki pannulla niin että ne ovat kullanruskeita.",
+                    "Kasaa tacot: levitä leivälle majoneesia, hoisinkastiketta ja srirachaa, lisää salaatti, proteiini, silmusalaatti ja sipulirouhe.",
+                    "Purista vielä päälle limemehua ja halutessasi chiliä, sekä korianteria"
+                ]
+            },
+            {
+                id: 7,
+                title: "Tteokbokki",
+                description: "kahdelle, 20 minuuttia",
+                ingredientAmounts: [
+                    "300g tteok",
+                    "100g juustoa",
+                    "1rkl gochuchang",
+                    "1rkl sokeri",
+                    "liemikuutio",
+                    "1rkl soijakastike"
+                ],
+                categories: ["pääruoka", "aasialainen"],
+                image: "https://christieathome.com/wp-content/uploads/2021/11/Rose-Tteokbokki-14.jpg",
+                instructions: [
+                    "Huuhdo tteok.",
+                    "Lisää pannulle vettä ja mausteet.",
+                    "Lisää tteok ja keitä kunnes kastike on halutun paksuista."
+                ]
+            },
+            {
+                id: 8,
+                title: "Kaalilaatikko",
+                description: "",
+                ingredientAmounts: [
+                    "400g naudan jauhelihaa",
+                    "1,5dl puuroriisiä",
+                    "4 dl lihalientä",
+                    "kerä- tai varhaiskaalia",
+                    "0,5dl siirappia",
+                    "1tl suolaa",
+                    "1 sipuli",
+                    "1tl mustapippuria",
+                    "2dl kerma",
+                    "1rkl öljyä"
+                ],
+                categories: ["pääruoka"],
+                image: "https://images.ctfassets.net/0yf82hjfqumz/JYrUMedqScWqqUQQ0esiU/91dbd6855cccff640e33278f7a58c09b/655df651-fade-561e-b6ee-39a010f1e869.jpg",
+                instructions: [
+                    "Paista jauheliha pannulla.",
+                    "Lisää taco-mausteseos ja vettä ohjeen mukaan.",
+                    "Lämmitä tacokuoret uunissa tai mikroaaltouunissa.",
+                    "Pilko täytteet: salaatti, tomaatit, sipuli.",
+                    "Raasta juusto ja laita kermaviili pöytään.",
+                    "Täytä tacokuoret ja tarjoile."
+                ]
+            },
+            {
+                id: 9,
+                title: "Matchavalkosuklaavadelmakeksit",
+                description: "Vauvasuut voivat jättää matchan pois",
+                ingredientAmounts: [
+                    "180g voi",
+                    "160g valkosuklaa",
+                    "90g fariinisokeri",
+                    "70g sokeri",
+                    "0,5 rkl vaniljasokeri",
+                    "13g matchajauhe",
+                    "1 muna",
+                    "5g suola",
+                    "1 tl leivinjauhe",
+                    "1 rkl perunajauho",
+                    "275g vehnäjauho",
+                    "vadelma"
+                ],
+                categories: ["jälkiruoka", "leivonnainen"],
+                image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=800&q=80",
+                instructions: [
+                    "Ruskista voi kattilassa matalalla lämmöllä samalla koko ajan sekoittaen.",
+                    "Pilko suklaa.",
+                    "Sekoita kulhossa fariinisokeri, sokeri, vaniljasokeri, matcha ja muna.",
+                    "Lisää joukkoon ruskistettu voi ja sekoita hyvin.",
+                    "Lisää joukkoon leivinjauhe, perunajauho ja suola.",
+                    "Lisää vehnäjauho vähän kerrallaan ja sekoita taikina tasaiseksi.",
+                    "Kääntele valkosuklaapalat taikinan joukkoon.",
+                    "Muotoile keksitaikinat litteiksi kiekoiksi leivinpaperin päälle pellille.",
+                    "Paina jokaisen keksin keskelle muutama vadelma.",
+                    "Paista 175-190 asteessa noin 12-14 minuuttia, kunnes keksit ovat saaneet hiukan väriä reunoihin.",
+                    "Anna jäähtyä ennen tarjoilua."
+                ]
+            },
+            {
+                id: 10,
+                title: "Appelsiinikana",
+                description: "",
+                ingredientAmounts: [
+                    "2 rkl soijakastike",
+                    "valkosipuli",
+                    "seesamiöljy",
+                    "1 tl sipulijauhe",
+                    "mustapippuri",
+                    "5 rkl soijakastike",
+                    "2 rkl hunaja",
+                    "1 dl appelsiinimehu",
+                    "2 tl maissitärkkelys",
+                    "kana"
+                ],
+                categories: ["pääruoka"],
+                image: "https://images.ctfassets.net/0yf82hjfqumz/JYrUMedqScWqqUQQ0esiU/91dbd6855cccff640e33278f7a58c09b/655df651-fade-561e-b6ee-39a010f1e869.jpg",
+                instructions: [
+                    "Marinoi kana, keitä kastike.",
+                    "Pyörittele kanat maissitärkkelyksessä ja paista.",
+                    "Lisää kanat kastikkeen joukkoon."
+                ]
+            }
+        ];
+
+        // DOM-elementit
+        const recipeContainer = document.getElementById('recipe-container');
+        const groceryList = document.getElementById('grocery-list');
+        const searchInput = document.getElementById('search-input');
+        const searchBtn = document.getElementById('search-btn');
+        const clearListBtn = document.getElementById('clear-list-btn');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        // Nykyinen suodatin
+        let currentFilter = 'kaikki';
+        let currentSearch = '';
+
+        // Alusta sovellus
+        function init() {
+            displayRecipes(recipes);
+            loadGroceryList();
+            
+            // Tapahtumakuuntelijat
+            searchBtn.addEventListener('click', handleSearch);
+            searchInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    handleSearch();
+                }
+            });
+            clearListBtn.addEventListener('click', clearGroceryList);
+            
+            // Suodatinpainikkeet
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Poista aktiivinen luokka kaikilta
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Lisää aktiivinen luokka klikatulle
+                    this.classList.add('active');
+                    
+                    currentFilter = this.getAttribute('data-category');
+                    applyFilters();
+                });
+            });
+
+            // ESC-näppäin sulkee modalin
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    const modal = document.getElementById('recipe-modal');
+                    if (modal) {
+                        modal.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Näytä reseptit ruudukossa
+        function displayRecipes(recipesToShow) {
+            recipeContainer.innerHTML = '';
+            
+            if (recipesToShow.length === 0) {
+                recipeContainer.innerHTML = '<p class="empty-list">Reseptejä ei löytynyt. Kokeile toista hakusanaa tai suodatinta.</p>';
+                return;
+            }
+            
+            recipesToShow.forEach(recipe => {
+                const recipeCard = document.createElement('div');
+                recipeCard.className = 'recipe-card';
+                
+                recipeCard.innerHTML = `
+                    <div class="recipe-image" style="background-image: url('${recipe.image}')"></div>
+                    <div class="recipe-category">${recipe.categories.map(cat => getCategoryName(cat)).join(', ')}</div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">${recipe.title}</h3>
+                        <p class="recipe-description">${recipe.description}</p>
+                        <button class="add-to-list-btn" data-id="${recipe.id}">Lisää ostoslistaan</button>
+                        <button class="show-instructions-btn" data-id="${recipe.id}">Näytä ohje</button>
+                    </div>
+                `;
+                
+                recipeContainer.appendChild(recipeCard);
+            });
+            
+            // Lisää tapahtumakuuntelijat "Lisää ostoslistaan" -painikkeisiin
+            document.querySelectorAll('.add-to-list-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const recipeId = parseInt(this.getAttribute('data-id'));
+                    addRecipeToGroceryList(recipeId);
+                });
+            });
+            
+            // Lisää tapahtumakuuntelijat ohjenappeihin
+            document.querySelectorAll('.show-instructions-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const recipeId = parseInt(this.getAttribute('data-id'));
+                    showRecipeInstructions(recipeId);
+                });
+            });
+        }
+
+        // Kategorian nimi suomeksi
+        function getCategoryName(category) {
+            const categories = {
+                'pääruoka': 'Pääruoka',
+                'jälkiruoka': 'Jälkiruoka',
+                'kasvisruoka': 'Kasvisruoka',
+                'alkupala': 'Alkupala',
+                'leivonnainen': 'Leivonnainen',
+                'aasialainen': 'Aasialainen'
+            };
+            return categories[category] || category;
+        }
+
+        // Käsittele hakutoiminto
+        function handleSearch() {
+            currentSearch = searchInput.value.toLowerCase().trim();
+            applyFilters();
+        }
+
+        // Käytä suodattimia
+        function applyFilters() {
+            let filteredRecipes = recipes;
+            
+            // Tekstihaku
+            if (currentSearch) {
+                filteredRecipes = filteredRecipes.filter(recipe => 
+                    recipe.title.toLowerCase().includes(currentSearch) ||
+                    recipe.description.toLowerCase().includes(currentSearch) ||
+                    // previous code used recipe.ingredients which caused an error; use ingredientAmounts
+                    (Array.isArray(recipe.ingredientAmounts) && recipe.ingredientAmounts.some(ingredient => 
+                        ingredient.toLowerCase().includes(currentSearch)
+                    ))
+                );
+            }
+            
+            // Kategoriasuodatin
+            if (currentFilter !== 'kaikki') {
+                filteredRecipes = filteredRecipes.filter(recipe => 
+                    recipe.categories.includes(currentFilter)
+                );
+            }
+            
+            displayRecipes(filteredRecipes);
+        }
+
+        // Näytä reseptin ohjeet
+        function showRecipeInstructions(recipeId) {
+            const recipe = recipes.find(r => r.id === recipeId);
+            if (!recipe) return;
+            
+            const modal = document.getElementById('recipe-modal');
+            const modalContent = document.getElementById('modal-recipe-content');
+            
+            // Luo ohjesisältö
+            modalContent.innerHTML = `
+                <h2>${recipe.title}</h2>
+                <div class="modal-recipe-image" style="background-image: url('${recipe.image}')"></div>
+                
+                <div class="ingredients-with-amounts">
+                    <h4>Ainekset:</h4>
+                    <ul class="amount-list">
+                        ${recipe.ingredientAmounts.map(amount => `<li>${amount}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="recipe-instructions">
+                    <h3>Valmistusohje:</h3>
+                    <ol class="instruction-steps">
+                        ${recipe.instructions.map(instruction => `
+                            <li class="instruction-step">${instruction}</li>
+                        `).join('')}
+                    </ol>
+                </div>
+            `;
+            
+            // Näytä modal
+            modal.style.display = 'block';
+            
+            // Sulje modal klikkaamalla x-painiketta
+            document.querySelector('.close-modal').onclick = function() {
+                modal.style.display = 'none';
+            }
+            
+            // Sulje modal klikkaamalla taustaa
+            modal.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            }
+        }
+
+        // Lisää reseptin ainekset ostoslistaan
+        function addRecipeToGroceryList(recipeId) {
+            const recipe = recipes.find(r => r.id === recipeId);
+            if (!recipe) return;
+            
+            // Hae nykyinen ostoslista localStorage:sta
+            let currentList = JSON.parse(localStorage.getItem('groceryList')) || [];
+            
+            // Lisää uudet ainekset määrineen (yhdistä samat ainekset)
+            recipe.ingredientAmounts.forEach(ingredientWithAmount => {
+                // Etsi onko aines jo listalla
+                const existingIndex = currentList.findIndex(item => {
+                    const itemName = item.split(' - ')[0];
+                    const newItemName = ingredientWithAmount.split(' - ')[0];
+                    return itemName === newItemName;
+                });
+                
+                if (existingIndex === -1) {
+                    // Jos ei ole, lisää uutena
+                    currentList.push(ingredientWithAmount);
+                } else {
+                    // Jos on, yhdistä määrät
+                    const existing = currentList[existingIndex];
+                    currentList[existingIndex] = `${existing} + ${ingredientWithAmount}`;
+                }
+            });
+            
+            // Tallenna päivitetty lista localStorageen
+            localStorage.setItem('groceryList', JSON.stringify(currentList));
+            
+            // Päivitä näytettävä lista
+            displayGroceryList();
+            
+            // Näytä vahvistus
+            alert(`Reseptin "${recipe.title}" ainekset lisätty ostoslistaasi!`);
+        }
+
+        // Näytä ostoslista
+        function displayGroceryList() {
+            const groceryItems = JSON.parse(localStorage.getItem('groceryList')) || [];
+            
+            if (groceryItems.length === 0) {
+                groceryList.innerHTML = '<li class="empty-list">Ostoslistasi on tyhjä. Lisää aineksia resepteistä!</li>';
+                return;
+            }
+            
+            groceryList.innerHTML = '';
+            groceryItems.forEach((item, index) => {
+                const listItem = document.createElement('li');
+                listItem.className = 'grocery-item';
+                
+                // Erottele nimi ja määrä
+                const parts = item.split(' - ');
+                const name = parts[0];
+                const amount = parts.slice(1).join(' - ');
+                
+                listItem.innerHTML = `
+                    <div class="grocery-item-content">
+                        <div class="grocery-item-name">${name}</div>
+                        ${amount ? `<div class="grocery-item-amount">${amount}</div>` : ''}
+                    </div>
+                    <button class="delete-btn" data-index="${index}">Poista</button>
+                `;
+                groceryList.appendChild(listItem);
+            });
+            
+            // Lisää tapahtumakuuntelijat poista-painikkeisiin
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    removeFromGroceryList(index);
+                });
+            });
+        }
+
+        // Poista tuote ostoslistalta
+        function removeFromGroceryList(index) {
+            let groceryItems = JSON.parse(localStorage.getItem('groceryList')) || [];
+            
+            if (index >= 0 && index < groceryItems.length) {
+                groceryItems.splice(index, 1);
+                localStorage.setItem('groceryList', JSON.stringify(groceryItems));
+                displayGroceryList();
+            }
+        }
+
+        // Tyhjennä koko ostoslista
+        function clearGroceryList() {
+            if (confirm('Haluatko varmasti tyhjentää koko ostoslistan?')) {
+                localStorage.removeItem('groceryList');
+                displayGroceryList();
+            }
+        }
+
+        // Lataa ostoslista localStorage:sta sivun latautuessa
+        function loadGroceryList() {
+            displayGroceryList();
+        }
+
+        // Alusta sovellus
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
