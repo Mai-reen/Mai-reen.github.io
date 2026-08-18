@@ -268,14 +268,14 @@ const recipes = [
             "1 rkl perunajauho"
         ],
         categories: ["pääruoka", "aasialainen"],
-        image: "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_16:9/k%2FPhoto%2FRecipes%2F2024-05-chicken-teriyaki-190%2Fchicken-teriyaki-190-171-horizontal",
+        image: "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_16:9/k%2FPhoto%2FRecipes%2F2024-05-chicken-teriyaki-190%2Fchicken-teriyaki-190-171-horizont[...]",
         instructions: [
             "Paista kana pannulla.",
             "Lisää mausteet ja keitä kastike.",
             "Tarjoile riisin kanssa."
         ]
     },
-     {
+    {
     id: 12,
     title: "Cola ribsit",
     description: "",
@@ -296,11 +296,32 @@ const recipes = [
     image: "https://www.parastapoytaan.fi/assets/recipes/shutterstock-1125576632-scaled-e0898afa.webp",
     instructions: [
         "Sekoita mausteseoksen kaikki ainekset huolellisesti kulhossa ja hiero seos kauttaaltaan ribseihin. Aseta ne jääkaappiin vähintään kahdeksi tunniksi, mieluiten yön yli maustumaan.",
-        "Jaa ribsit kattilaan sopiviksi paloiksi, mutta pidä ne mahdollisimman isoina grillaamisen helpottamiseksi. Laita ribsit kattilaan ja kaada päälle kokista sekä omenamehua. Hauduta peitetty noin 2-3 tuntia.",
-        "Poista ribsit kattilasta ja keitä jäljelle jäänyttä lientä, kunnes sitä on jäljellä noin 1 dl ja se muuttuu paksuksi kastikkeeksi.",
-        "Kuumenna grilli. Levitä kastiketta ribseille ja grillaa niitä viisi minuuttia molemmilta puolilta, käännellen välillä. Sivele ribsit vielä glaseerauskastikkeella grillauksen lopuksi."
+        "Jaa ribsit kattilaan sopiviksi paloiksi, mutta pidä ne mahdollisimman isoina grillaamisen helpottamiseksi. Laita ribsit kattilaan ja kaada päälle kokista sekä omenamehua. Hauduta pei[...]\n        "Poista ribsit kattilasta ja keitä jäljelle jäänyttä lientä, kunnes sitä on jäljellä noin 1 dl ja se muuttuu paksuksi kastikkeeksi.",
+        "Kuumenna grilli. Levitä kastiketta ribseille ja grillaa niitä viisi minuuttia molemmilta puolilta, käännellen välillä. Sivele ribsit vielä glaseerauskastikkeella grillauksen lopuk[...]
     ]
-}
+},
+    {
+        id: 13,
+        title: "Omenastruudeli",
+        description: "Annosmäärä: 8 · Valmistusaika: noin 40 minuuttia · Helppo omenastruudeli",
+        ingredientAmounts: [
+            "1 lehtitaikinalevy",
+            "2-3 omenaa",
+            "200g kinuskikreemiä",
+            "1 tl kanelia",
+            "voisulaa (pinnalle)",
+            "tomusokeria (pinnalle)"
+        ],
+        categories: ["jälkiruoka", "leivonnainen"],
+        image: "",
+        instructions: [
+            "1. Kauli sulanut lehtitaikina hieman ohuemmaksi ja lämmitä uuni 200 asteeseen.",
+            "2. Poista omenista siemenkodat ja kuutioi ne. Yhdistä omenakuutiot kinuskikreemin ja kanelin kanssa ja sekoita hyvin.",
+            "3. Levitä omenatäyte tasaisesti lehtitaikinalevyn päälle. Rullaa taikina kääretortun tyyliin. Sivele taikinan pinta voisulalla ja paista uunissa noin 20 minuuttia.",
+            "4. Kun struudeli on valmis, ripottele sen päälle tomusokeria. Tarjoile struudeli esimerkiksi vaniljajäätelön tai -kastikkeen kera.",
+            "Anna jäähtyä hieman ennen tarjoilua."
+        ]
+    }
 ];
 
 // DOM-elementit
