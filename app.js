@@ -303,7 +303,7 @@ const recipes = [
     {
         id: 13,
         title: "Omenastruudeli",
-        description: "Annosmäärä: 8 · Valmistusaika: noin 40 minuuttia · Helppo omenastruudeli",
+        description: "noin 40 minuuttia",
         ingredientAmounts: [
             "1 lehtitaikinalevy",
             "2-3 omenaa",
