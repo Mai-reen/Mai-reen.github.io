@@ -296,7 +296,7 @@ const recipes = [
     image: "https://www.parastapoytaan.fi/assets/recipes/shutterstock-1125576632-scaled-e0898afa.webp",
     instructions: [
         "Sekoita mausteseoksen kaikki ainekset huolellisesti kulhossa ja hiero seos kauttaaltaan ribseihin. Aseta ne jääkaappiin vähintään kahdeksi tunniksi, mieluiten yön yli maustumaan.",
-        "Jaa ribsit kattilaan sopiviksi paloiksi, mutta pidä ne mahdollisimman isoina grillaamisen helpottamiseksi. Laita ribsit kattilaan ja kaada päälle kokista sekä omenamehua. Hauduta peitettynä noin 2-3 tuntia.",
+        "Jaa ribsit kattilaan sopiviksi paloiksi, mutta pidä ne mahdollisimman isoina grillaamisen helpottamiseksi. Laita ribsit kattilaan ja kaada päälle kokista sekä omenamehua. Hauduta peitetty noin 2-3 tuntia.",
         "Poista ribsit kattilasta ja keitä jäljelle jäänyttä lientä, kunnes sitä on jäljellä noin 1 dl ja se muuttuu paksuksi kastikkeeksi.",
         "Kuumenna grilli. Levitä kastiketta ribseille ja grillaa niitä viisi minuuttia molemmilta puolilta, käännellen välillä. Sivele ribsit vielä glaseerauskastikkeella grillauksen lopuksi."
     ]
