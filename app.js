@@ -268,7 +268,7 @@ const recipes = [
             "1 rkl perunajauho"
         ],
         categories: ["pääruoka", "aasialainen"],
-        image: "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_16:9/k%2FPhoto%2FRecipes%2F2024-05-chicken-teriyaki-190%2Fchicken-teriyaki-190-171-horizont[...]",
+        image: "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,chicken-teriyaki.jpg",
         instructions: [
             "Paista kana pannulla.",
             "Lisää mausteet ja keitä kastike.",
@@ -295,9 +295,9 @@ const recipes = [
     categories: ["pääruoka"],
     image: "https://www.parastapoytaan.fi/assets/recipes/shutterstock-1125576632-scaled-e0898afa.webp",
     instructions: [
-        "Sekoita mausteseoksen kaikki ainekset huolellisesti kulhossa ja hiero seos kauttaaltaan ribseihin. Aseta ne jääkaappiin vähintään kahdeksi tunniksi, mieluiten yön yli maustumaan.",
-        "Jaa ribsit kattilaan sopiviksi paloiksi, mutta pidä ne mahdollisimman isoina grillaamisen helpottamiseksi. Laita ribsit kattilaan ja kaada päälle kokista sekä omenamehua. Hauduta pei[...]\n        "Poista ribsit kattilasta ja keitä jäljelle jäänyttä lientä, kunnes sitä on jäljellä noin 1 dl ja se muuttuu paksuksi kastikkeeksi.",
-        "Kuumenna grilli. Levitä kastiketta ribseille ja grillaa niitä viisi minuuttia molemmilta puolilta, käännellen välillä. Sivele ribsit vielä glaseerauskastikkeella grillauksen lopuk[...]
+        "Hieroi mausteseos ribseille ja anna maustua jääkaapissa muutama tunti, mieluiten yön yli.",
+        "Hauduta ribsit Coca Colassa ja omenamehussa miedolla lämmöllä kunnes liha on mureaa.",
+        "Viimeistele grillaamalla ja sivele glaseerauskastikkeella ennen tarjoilua."
     ]
 },
     {
