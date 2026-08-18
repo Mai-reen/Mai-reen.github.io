@@ -275,32 +275,32 @@ const recipes = [
             "Tarjoile riisin kanssa."
         ]
     },
-      {
-         id: 12,
-         title: "Cola ribsit",
-         description: "",
-         ingredientAmounts: [
-            "1 kg porsaan kylkiluita rivinä",
-            "2 rkl ruokosokeria tai fariinisokeria",
-            "1 rkl paprikamaustetta/savupaprikaa",
-            "1 rkl mustapippuria",
-            "1 rkl suolaa",
-            "1 rkl chilijauhetta",
-            "1 rkl valkosipulijauhetta",
-            "1 rkl sipulijauhetta",
-            "1 tl cayennepippuria",
-            "1 l pullo Coca Colaa",
-            "1 l omenamehua"
-        ],
-        categories: ["pääruoka"],
-        image: "https://www.parastapoytaan.fi/assets/recipes/shutterstock-1125576632-scaled-e0898afa.webp",
-        instructions: [
-                    "Sekoita mausteseoksen kaikki ainekset huolellisesti kulhossa ja hiero seos kauttaaltaan ribseihin. Aseta ne jääkaappiin vähintään kahdeksi tunniksi, mieluiten yön yli maustumaan. Vaikka voit valmistaa ribsit heti, pidempi marinointiaika parantaa makua.",
-                    "Jaa ribsit kattilaan sopiviksi paloiksi, mutta pidä ne mahdollisimman isoina grillaamisen helpottamiseksi. Laita ribsit kattilaan ja kaada päälle kokis sekä omenamehu. Hauduta ribsejä miedolla lämmöllä kannen alla kahden tunnin ajan. Sammuta lämpö ja anna niiden vetäytyä liemessä vielä 20 minuuttia.",
-                    "Poista ribsit kattilasta ja keitä jäljelle jäänyttä lientä, kunnes sitä on jäljellä noin 1 dl ja se muuttuu paksuksi kastikkeeksi.",
-                    "Kuumenna grilli. Levitä kastiketta ribseille ja grillaa niitä viisi minuuttia molemmilta puolilta, käännellen välillä. Sivele ribsit vielä glaseerauskastikkeella grillauksen lopuksi."
-                ]
-            }
+     {
+    id: 12,
+    title: "Cola ribsit",
+    description: "",
+    ingredientAmounts: [
+        "1 kg porsaan kylkiluita rivinä",
+        "2 rkl ruokosokeria tai fariinisokeria",
+        "1 rkl paprikamaustetta/savupaprikaa",
+        "1 rkl mustapippuria",
+        "1 rkl suolaa",
+        "1 rkl chilijauhetta",
+        "1 rkl valkosipulijauhetta",
+        "1 rkl sipulijauhetta",
+        "1 tl cayennepippuria",
+        "1 l pullo Coca Colaa",
+        "1 l omenamehua"
+    ],
+    categories: ["pääruoka"],
+    image: "https://www.parastapoytaan.fi/assets/recipes/shutterstock-1125576632-scaled-e0898afa.webp",
+    instructions: [
+        "Sekoita mausteseoksen kaikki ainekset huolellisesti kulhossa ja hiero seos kauttaaltaan ribseihin. Aseta ne jääkaappiin vähintään kahdeksi tunniksi, mieluiten yön yli maustumaan.",
+        "Jaa ribsit kattilaan sopiviksi paloiksi, mutta pidä ne mahdollisimman isoina grillaamisen helpottamiseksi. Laita ribsit kattilaan ja kaada päälle kokista sekä omenamehua. Hauduta peitettynä noin 2-3 tuntia.",
+        "Poista ribsit kattilasta ja keitä jäljelle jäänyttä lientä, kunnes sitä on jäljellä noin 1 dl ja se muuttuu paksuksi kastikkeeksi.",
+        "Kuumenna grilli. Levitä kastiketta ribseille ja grillaa niitä viisi minuuttia molemmilta puolilta, käännellen välillä. Sivele ribsit vielä glaseerauskastikkeella grillauksen lopuksi."
+    ]
+}
 ];
 
 // DOM-elementit
