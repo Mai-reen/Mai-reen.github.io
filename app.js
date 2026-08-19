@@ -321,6 +321,42 @@ const recipes = [
             "4. Kun struudeli on valmis, ripottele sen päälle tomusokeria. Tarjoile struudeli esimerkiksi vaniljajäätelön tai -kastikkeen kera.",
             "Anna jäähtyä hieman ennen tarjoilua."
         ]
+},
+    {
+        id: 14,
+        title: "Suklaakakku vadelmavalkosuklaatäytteellä",
+        description: "2h",
+        ingredientAmounts: [
+            "0,75 dl rypsiöljy",
+            "2 kananmuna",
+            "1,5 dl maustamaton jogurtti",
+            "1,5 dl sokeri",
+            "0,75 dl fariinisokeri",
+            "2,75 dl vehnäjauhoja"
+            "0,75 dl tumma kaakaojauhe"
+            "1 tl ruokasooda"
+            "1 tl leivinjauhe"
+            "ripaus suola"
+            "1,25 dl kuuma vesi"
+            "250 g pakastevadelma"
+            "1-2 rkl sokeri"
+            "1,5 tl perunajauho"
+            "2 rkl vesi"
+            "150 g valkosuklaa"
+            "0,5 dl vispikerma"
+            "400 g maustamaton tuorejuusto"
+            "50 g ranskankerma"
+            "0,5 dl tomusokeri"
+        ],
+        categories: ["jälkiruoka", "leivonnainen"],
+        image: "",
+        instructions: [
+            "Sekoita öljy, kananmunat ja jogurtti keskenään, sekoita kuivat aineet keskenään ja lisää märkien aineiden joukkoon (älä sekoita liikaa).",
+            "Sekoita lopuksi joukkoon kuuma vesi, paista leivinpaperilla vuoratussa irtopohjavuoassa (22-24cm) 175 asteessa noin 25 minuuttia. Anna pohjan jäähtyä ja leikkaa kahteen osaan.",
+            "Kuumenna vadelmia ja sokeria kattilassa kunnes ne pehmenevät. Sekoita perunajauho tilkkaan vettä ja lisää vadelmien joukkoon vähitellen ja samalla sekoittaen. Seoksen pitäisi jähmettyä hieman. Ota pois liedeltä ja anna jäähtyä.",
+            "Sulata suklaa ja jätä sivuun odottamaan, vatkaa kerma löysäksi vaahdoksi ja vatkaa joukkoon tuorejuusto. Lisää ranskankerma ja tomusokeri ja vatkaa sekaisin. Lisää lopuksi sulatettu valkosuklaa.",
+            "Levitä puolet täytteestä ensimmäisen pohjan päälle (pohjia voi kostuttaa vähän esim maidolla), lisää puolet vadelmista. Toista sama toiseen kerrokseen ja koristele tuoreilla vadelmilla sekä suklaarouheella."
+        ]
     }
 ];
 
