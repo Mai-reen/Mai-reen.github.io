@@ -321,6 +321,41 @@ const recipes = [
             "4. Kun struudeli on valmis, ripottele sen päälle tomusokeria. Tarjoile struudeli esimerkiksi vaniljajäätelön tai -kastikkeen kera.",
             "Anna jäähtyä hieman ennen tarjoilua."
         ]
+    },
+    {
+        id: 14,
+        title: "Vadelma-valkosuklaakakku",
+        description: "noin 60 minuuttia",
+        ingredientAmounts: [
+            "0,75 dl rypsiöljyä",
+            "2 kananmunaa",
+            "1,5 dl maustamatonta jogurttia",
+            "1,5 dl sokeria",
+            "0,75 dl fariinisokeria",
+            "2,75 dl vehnäjauhoja",
+            "0,75 dl tummaa kaakaojauhetta",
+            "1 tl ruokasoodaa",
+            "1 tl leivinjauhetta",
+            "Ripaus suolaa",
+            "1,25 dl kuumaa vettä",
+            "250 g pakastevadelmia",
+            "1-2 rkl sokeria (vadelmatäytteeseen)",
+            "1,5 tl perunajauhoja",
+            "150 g valkosuklaata",
+            "0,5 dl vispikermaa",
+            "400 g maustamatonta tuorejuustoa",
+            "50 g ranskankermaa",
+            "0,5 dl tomusokeria",
+            "tuoreita vadelmia koristeeksi"
+        ],
+        categories: ["jälkiruoka", "leivonnainen"],
+        image: "",
+        instructions: [
+            "Valmista kakkupohja: sekoita öljy, kananmunat ja jogurtti keskenään. Sekoita kuivat aineet erikseen ja lisää märkien aineiden joukkoon (älä sekoita liikaa). Lisää lopuksi kuuma vesi. Paista leivinpaperilla vuoratussa 22–24 cm irtopohjavuoassa 175 asteessa noin 25 minuuttia. Anna jäähtyä ja leikkaa kahteen osaan.",
+            "Valmista vadelmatäyte: kuumenna vadelmat ja sokeri kattilassa kunnes pehmenevät. Sekoita perunajauho pieneen tilkkaan vettä ja lisää varovasti sekoittaen kunnes seos jähmettyy hieman. Anna jäähtyä.",
+            "Valmista valkosuklaatäyte: sulata valkosuklaa ja jätä hetkiseksi jäähtymään. Vatkaa kerma löysäksi vaahdoksi, lisää tuorejuusto, ranskankerma ja tomusokeri, sekoita tasaiseksi ja lisää lopuksi sulatettu valkosuklaa.",
+            "Kokoa kakku: kostuta pohjia halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuoreilla vadelmilla ja halutessasi valkosuklaarouheella ennen tarjoilua."
+        ]
     }
 ];
 
