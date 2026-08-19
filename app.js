@@ -321,46 +321,10 @@ const recipes = [
             "4. Kun struudeli on valmis, ripottele sen päälle tomusokeria. Tarjoile struudeli esimerkiksi vaniljajäätelön tai -kastikkeen kera.",
             "Anna jäähtyä hieman ennen tarjoilua."
         ]
-},
-    {
-        id: 14,
-        title: "Suklaakakku vadelmavalkosuklaatäytteellä",
-        description: "2h",
-        ingredientAmounts: [
-            "0,75 dl rypsiöljy",
-            "2 kananmuna",
-            "1,5 dl maustamaton jogurtti",
-            "1,5 dl sokeri",
-            "0,75 dl fariinisokeri",
-            "2,75 dl vehnäjauhoja"
-            "0,75 dl tumma kaakaojauhe"
-            "1 tl ruokasooda"
-            "1 tl leivinjauhe"
-            "ripaus suola"
-            "1,25 dl kuuma vesi"
-            "250 g pakastevadelma"
-            "1-2 rkl sokeri"
-            "1,5 tl perunajauho"
-            "2 rkl vesi"
-            "150 g valkosuklaa"
-            "0,5 dl vispikerma"
-            "400 g maustamaton tuorejuusto"
-            "50 g ranskankerma"
-            "0,5 dl tomusokeri"
-        ],
-        categories: ["jälkiruoka", "leivonnainen"],
-        image: "",
-        instructions: [
-            "Sekoita öljy, kananmunat ja jogurtti keskenään, sekoita kuivat aineet keskenään ja lisää märkien aineiden joukkoon (älä sekoita liikaa).",
-            "Sekoita lopuksi joukkoon kuuma vesi, paista leivinpaperilla vuoratussa irtopohjavuoassa (22-24cm) 175 asteessa noin 25 minuuttia. Anna pohjan jäähtyä ja leikkaa kahteen osaan.",
-            "Kuumenna vadelmia ja sokeria kattilassa kunnes ne pehmenevät. Sekoita perunajauho tilkkaan vettä ja lisää vadelmien joukkoon vähitellen ja samalla sekoittaen. Seoksen pitäisi jähmettyä hieman. Ota pois liedeltä ja anna jäähtyä.",
-            "Sulata suklaa ja jätä sivuun odottamaan, vatkaa kerma löysäksi vaahdoksi ja vatkaa joukkoon tuorejuusto. Lisää ranskankerma ja tomusokeri ja vatkaa sekaisin. Lisää lopuksi sulatettu valkosuklaa.",
-            "Levitä puolet täytteestä ensimmäisen pohjan päälle (pohjia voi kostuttaa vähän esim maidolla), lisää puolet vadelmista. Toista sama toiseen kerrokseen ja koristele tuoreilla vadelmilla sekä suklaarouheella."
-        ]
     }
 ];
 
-// DOM-elementit
+// DOM-elementit (valitut elementit voivat puuttua; käsitellään turvallisesti)
 const recipeContainer = document.getElementById('recipe-container');
 const groceryList = document.getElementById('grocery-list');
 const searchInput = document.getElementById('search-input');
@@ -372,57 +336,90 @@ const filterBtns = document.querySelectorAll('.filter-btn');
 let currentFilter = 'kaikki';
 let currentSearch = '';
 
+// Helper: jäsentää ainesosan määrän ja nimen
+function parseIngredient(str) {
+    const raw = (str || '').trim();
+    if (!raw) return { name: '', amount: '', raw: '' };
+    const tokens = raw.split(/\s+/);
+    // jos ensimmäinen token sisältää numeron, pidetään se määränä
+    if (/\d/.test(tokens[0])) {
+        const amount = tokens.shift();
+        const name = tokens.join(' ');
+        return { name: name || amount, amount, raw };
+    }
+    // ei määrä-alkua
+    return { name: raw, amount: '', raw };
+}
+
+// Lataa ostoslista localStoragesta ja normalisoi formaatti (voi sisältää vanhaa string-formaattia)
+function loadGroceryFromStorage() {
+    const data = JSON.parse(localStorage.getItem('groceryList')) || [];
+    if (data.length === 0) return [];
+    if (typeof data[0] === 'string') {
+        return data.map(s => parseIngredient(s));
+    }
+    // Oletetaan että objektimuodossa on name/amount/raw
+    return data.map(item => ({ name: item.name || item.raw || '', amount: item.amount || '', raw: item.raw || (item.name + (item.amount ? ' - ' + item.amount : '')) }));
+}
+
+function saveGroceryToStorage(list) {
+    localStorage.setItem('groceryList', JSON.stringify(list));
+}
+
 // Alusta sovellus
 function init() {
     displayRecipes(recipes);
-    loadGroceryList();
-    
-    // Tapahtumakuuntelijat
-    searchBtn.addEventListener('click', handleSearch);
-    searchInput.addEventListener('keyup', function(event) {
-        if (event.key === 'Enter') {
-            handleSearch();
-        }
-    });
-    clearListBtn.addEventListener('click', clearGroceryList);
-    
-    // Suodatinpainikkeet
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Poista aktiivinen luokka kaikilta
-            filterBtns.forEach(b => b.classList.remove('active'));
-            // Lisää aktiivinen luokka klikatulle
-            this.classList.add('active');
-            
-            currentFilter = this.getAttribute('data-category');
-            applyFilters();
+    displayGroceryList();
+
+    // Tapahtumakuuntelijat vain jos elementit löytyvät
+    if (searchBtn) searchBtn.addEventListener('click', handleSearch);
+    if (searchInput) {
+        searchInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                handleSearch();
+            }
         });
-    });
+    }
+    if (clearListBtn) clearListBtn.addEventListener('click', clearGroceryList);
+
+    // Suodatinpainikkeet
+    if (filterBtns && filterBtns.length) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.getAttribute('data-category');
+                applyFilters();
+            });
+        });
+    }
 
     // ESC-näppäin sulkee modalin
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
             const modal = document.getElementById('recipe-modal');
-            if (modal) {
-                modal.style.display = 'none';
-            }
+            if (modal) modal.style.display = 'none';
         }
     });
 }
 
 // Näytä reseptit ruudukossa
 function displayRecipes(recipesToShow) {
+    if (!recipeContainer) {
+        console.warn('Puuttuu #recipe-container — reseptit eivät näy.');
+        return;
+    }
     recipeContainer.innerHTML = '';
-    
-    if (recipesToShow.length === 0) {
+
+    if (!recipesToShow || recipesToShow.length === 0) {
         recipeContainer.innerHTML = '<p class="empty-list">Reseptejä ei löytynyt. Kokeile toista hakusanaa tai suodatinta.</p>';
         return;
     }
-    
+
     recipesToShow.forEach(recipe => {
         const recipeCard = document.createElement('div');
         recipeCard.className = 'recipe-card';
-        
+
         recipeCard.innerHTML = `
             <div class="recipe-image" style="background-image: url('${recipe.image}')"></div>
             <div class="recipe-category">${recipe.categories.map(cat => getCategoryName(cat)).join(', ')}</div>
@@ -433,10 +430,10 @@ function displayRecipes(recipesToShow) {
                 <button class="show-instructions-btn" data-id="${recipe.id}">Näytä ohje</button>
             </div>
         `;
-        
+
         recipeContainer.appendChild(recipeCard);
     });
-    
+
     // Lisää tapahtumakuuntelijat "Lisää ostoslistaan" -painikkeisiin
     document.querySelectorAll('.add-to-list-btn').forEach(button => {
         button.addEventListener('click', function() {
@@ -444,7 +441,7 @@ function displayRecipes(recipesToShow) {
             addRecipeToGroceryList(recipeId);
         });
     });
-    
+
     // Lisää tapahtumakuuntelijat ohjenappeihin
     document.querySelectorAll('.show-instructions-btn').forEach(button => {
         button.addEventListener('click', function() {
@@ -469,32 +466,33 @@ function getCategoryName(category) {
 
 // Käsittele hakutoiminto
 function handleSearch() {
+    if (!searchInput) return;
     currentSearch = searchInput.value.toLowerCase().trim();
     applyFilters();
 }
 
 // Käytä suodattimia
 function applyFilters() {
-    let filteredRecipes = recipes;
-    
+    let filteredRecipes = recipes.slice();
+
     // Tekstihaku
     if (currentSearch) {
         filteredRecipes = filteredRecipes.filter(recipe => 
-            recipe.title.toLowerCase().includes(currentSearch) ||
-            recipe.description.toLowerCase().includes(currentSearch) ||
+            (recipe.title || '').toLowerCase().includes(currentSearch) ||
+            (recipe.description || '').toLowerCase().includes(currentSearch) ||
             (Array.isArray(recipe.ingredientAmounts) && recipe.ingredientAmounts.some(ingredient => 
                 ingredient.toLowerCase().includes(currentSearch)
             ))
         );
     }
-    
+
     // Kategoriasuodatin
     if (currentFilter !== 'kaikki') {
         filteredRecipes = filteredRecipes.filter(recipe => 
-            recipe.categories.includes(currentFilter)
+            Array.isArray(recipe.categories) && recipe.categories.includes(currentFilter)
         );
     }
-    
+
     displayRecipes(filteredRecipes);
 }
 
@@ -502,10 +500,17 @@ function applyFilters() {
 function showRecipeInstructions(recipeId) {
     const recipe = recipes.find(r => r.id === recipeId);
     if (!recipe) return;
-    
+
     const modal = document.getElementById('recipe-modal');
     const modalContent = document.getElementById('modal-recipe-content');
-    
+
+    // Jos modal ei ole määritelty, näytetään yksinkertainen alert-teksti varalta
+    if (!modal || !modalContent) {
+        let text = recipe.title + "\n\nAinekset:\n" + (recipe.ingredientAmounts || []).join('\n') + "\n\nOhjeet:\n" + (recipe.instructions || []).join('\n');
+        alert(text);
+        return;
+    }
+
     // Luo ohjesisältö
     modalContent.innerHTML = `
         <h2>${recipe.title}</h2>
@@ -514,28 +519,27 @@ function showRecipeInstructions(recipeId) {
         <div class="ingredients-with-amounts">
             <h4>Ainekset:</h4>
             <ul class="amount-list">
-                ${recipe.ingredientAmounts.map(amount => `<li>${amount}</li>`).join('')}
+                ${ (recipe.ingredientAmounts || []).map(amount => `<li>${amount}</li>`).join('') }
             </ul>
         </div>
         
         <div class="recipe-instructions">
             <h3>Valmistusohje:</h3>
             <ol class="instruction-steps">
-                ${recipe.instructions.map(instruction => `
+                ${ (recipe.instructions || []).map(instruction => `
                     <li class="instruction-step">${instruction}</li>
-                `).join('')}
+                `).join('') }
             </ol>
         </div>
     `;
-    
+
     // Näytä modal
     modal.style.display = 'block';
-    
+
     // Sulje modal klikkaamalla x-painiketta
-    document.querySelector('.close-modal').onclick = function() {
-        modal.style.display = 'none';
-    }
-    
+    const closeBtn = modal.querySelector('.close-modal');
+    if (closeBtn) closeBtn.onclick = function() { modal.style.display = 'none'; };
+
     // Sulje modal klikkaamalla taustaa
     modal.onclick = function(event) {
         if (event.target === modal) {
@@ -548,58 +552,54 @@ function showRecipeInstructions(recipeId) {
 function addRecipeToGroceryList(recipeId) {
     const recipe = recipes.find(r => r.id === recipeId);
     if (!recipe) return;
-    
-    // Hae nykyinen ostoslista localStorage:sta
-    let currentList = JSON.parse(localStorage.getItem('groceryList')) || [];
-    
-    // Lisää uudet ainekset määrineen (yhdistä samat ainekset)
+
+    // Hae nykyinen ostoslista localStorage:sta (objektit)
+    let currentList = loadGroceryFromStorage();
+
     recipe.ingredientAmounts.forEach(ingredientWithAmount => {
-        // Etsi onko aines jo listalla
-        const existingIndex = currentList.findIndex(item => {
-            const itemName = item.split(' - ')[0];
-            const newItemName = ingredientWithAmount.split(' - ')[0];
-            return itemName === newItemName;
-        });
-        
+        const parsed = parseIngredient(ingredientWithAmount);
+        const newName = parsed.name.trim().toLowerCase();
+
+        const existingIndex = currentList.findIndex(item => (item.name || '').trim().toLowerCase() === newName);
         if (existingIndex === -1) {
-            // Jos ei ole, lisää uutena
-            currentList.push(ingredientWithAmount);
+            currentList.push(parsed);
         } else {
-            // Jos on, yhdistä määrät
+            // yhdistetään määrät ja raw
             const existing = currentList[existingIndex];
-            currentList[existingIndex] = `${existing} + ${ingredientWithAmount}`;
+            const combinedAmount = [existing.amount, parsed.amount].filter(Boolean).join(' + ');
+            const combinedRaw = [existing.raw, parsed.raw].filter(Boolean).join(' + ');
+            currentList[existingIndex] = { name: existing.name || parsed.name, amount: combinedAmount, raw: combinedRaw };
         }
     });
-    
-    // Tallenna päivitetty lista localStorageen
-    localStorage.setItem('groceryList', JSON.stringify(currentList));
-    
-    // Päivitä näytettävä lista
+
+    saveGroceryToStorage(currentList);
     displayGroceryList();
-    
-    // Näytä vahvistus
+
     alert(`Reseptin "${recipe.title}" ainekset lisätty ostoslistaasi!`);
 }
 
 // Näytä ostoslista
 function displayGroceryList() {
-    const groceryItems = JSON.parse(localStorage.getItem('groceryList')) || [];
-    
+    const groceryItems = loadGroceryFromStorage();
+
+    if (!groceryList) {
+        console.warn('Puuttuu #grocery-list — ostoslista ei näy.');
+        return;
+    }
+
     if (groceryItems.length === 0) {
         groceryList.innerHTML = '<li class="empty-list">Ostoslistasi on tyhjä. Lisää aineksia resepteistä!</li>';
         return;
     }
-    
+
     groceryList.innerHTML = '';
     groceryItems.forEach((item, index) => {
         const listItem = document.createElement('li');
         listItem.className = 'grocery-item';
-        
-        // Erottele nimi ja määrä
-        const parts = item.split(' - ');
-        const name = parts[0];
-        const amount = parts.slice(1).join(' - ');
-        
+
+        const name = item.name || item.raw || '';
+        const amount = item.amount || '';
+
         listItem.innerHTML = `
             <div class="grocery-item-content">
                 <div class="grocery-item-name">${name}</div>
@@ -609,9 +609,9 @@ function displayGroceryList() {
         `;
         groceryList.appendChild(listItem);
     });
-    
+
     // Lisää tapahtumakuuntelijat poista-painikkeisiin
-    document.querySelectorAll('.delete-btn').forEach(button => {
+    groceryList.querySelectorAll('.delete-btn').forEach(button => {
         button.addEventListener('click', function() {
             const index = parseInt(this.getAttribute('data-index'));
             removeFromGroceryList(index);
@@ -621,11 +621,11 @@ function displayGroceryList() {
 
 // Poista tuote ostoslistalta
 function removeFromGroceryList(index) {
-    let groceryItems = JSON.parse(localStorage.getItem('groceryList')) || [];
-    
+    let groceryItems = loadGroceryFromStorage();
+
     if (index >= 0 && index < groceryItems.length) {
         groceryItems.splice(index, 1);
-        localStorage.setItem('groceryList', JSON.stringify(groceryItems));
+        saveGroceryToStorage(groceryItems);
         displayGroceryList();
     }
 }
@@ -638,10 +638,9 @@ function clearGroceryList() {
     }
 }
 
-// Lataa ostoslista localStorage:sta sivun latautuessa
-function loadGroceryList() {
-    displayGroceryList();
-}
-
 // Alusta sovellus
-document.addEventListener('DOMContentLoaded', init);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
