@@ -313,7 +313,7 @@ const recipes = [
             "tomusokeria (pinnalle)"
         ],
         categories: ["jälkiruoka", "leivonnainen"],
-        image: "",
+        image: "https://images.unsplash.com/photo-1599599810694-b0e8bfb1f0d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
         instructions: [
             "1. Kauli sulanut lehtitaikina hieman ohuemmaksi ja lämmitä uuni 200 asteeseen.",
             "2. Poista omenista siemenkodat ja kuutioi ne. Yhdistä omenakuutiot kinuskikreemin ja kanelin kanssa ja sekoita hyvin.",
@@ -349,12 +349,13 @@ const recipes = [
             "tuoreita vadelmia koristeeksi"
         ],
         categories: ["jälkiruoka", "leivonnainen"],
-        image: "",
+        image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
         instructions: [
-            "Valmista kakkupohja: sekoita öljy, kananmunat ja jogurtti keskenään. Sekoita kuivat aineet erikseen ja lisää märkien aineiden joukkoon (älä sekoita liikaa). Lisää lopuksi kuuma vesi. Paista leivinpaperilla vuoratussa 22–24 cm irtopohjavuoassa 175 asteessa noin 25 minuuttia. Anna jäähtyä ja leikkaa kahteen osaan.",
-            "Valmista vadelmatäyte: kuumenna vadelmat ja sokeri kattilassa kunnes pehmenevät. Sekoita perunajauho pieneen tilkkaan vettä ja lisää varovasti sekoittaen kunnes seos jähmettyy hieman. Anna jäähtyä.",
-            "Valmista valkosuklaatäyte: sulata valkosuklaa ja jätä hetkiseksi jäähtymään. Vatkaa kerma löysäksi vaahdoksi, lisää tuorejuusto, ranskankerma ja tomusokeri, sekoita tasaiseksi ja lisää lopuksi sulatettu valkosuklaa.",
-            "Kokoa kakku: kostuta pohjia halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuoreilla vadelmilla ja halutessasi valkosuklaarouheella ennen tarjoilua."
+            "Valmista kakkupohja: sekoita öljy, kananmunat ja jogurtti keskenään. Sekoita kuivat aineet erikseen ja lisää märkien aineiden joukkoon (älä sekoita liikaa). Lisää lopuksi kuuma vesi. Jaa taikina kahteen osaan, toinen jää tummanruskeaksi ja toinen saadaan valkeammaksi vähemmällä kaakaojauholla.",
+            "Kaada taikinayhdistelmät uunivuokaan leivinpaperin kanssa ja paista 175 asteessa noin 20-25 minuuttia kunnes paistot ovat kypsiä.",
+            "Valmista vadelmatäyte: kuumenna vadelmat ja sokeri kattilassa kunnes pehmenevät. Sekoita perunajauho pieneen tilkkaan vettä ja lisää varovasti sekoittaen kunnes seos jähmettyy hieman. Jätä jäähtymään.",
+            "Valmista valkosuklaatäyte: sulata valkosuklaa vesihauteessa ja jätä hetkiseksi jäähtymään. Vatkaa kerma löysäksi vaahdoksi, lisää tuorejuusto, ranskankerma ja tomusokeri, sekoita tasaiseksi. Lisää jäähtynyt valkosuklaa varovasti sekoittaen.",
+            "Kokoa kakku: kostuta paistopohja halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuoreilla vadelmoilla ja halutessa valkosuklaarasteella."
         ]
     }
 ];
