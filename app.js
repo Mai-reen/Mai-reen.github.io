@@ -351,11 +351,11 @@ const recipes = [
         categories: ["jälkiruoka", "leivonnainen"],
         image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
         instructions: [
-            "Valmista kakkupohja: sekoita öljy, kananmunat ja jogurtti keskenään. Sekoita kuivat aineet erikseen ja lisää märkien aineiden joukkoon (älä sekoita liikaa). Lisää lopuksi kuuma vesi. Jaa taikina kahteen osaan, toinen jää tummanruskeaksi ja toinen saadaan valkeammaksi vähemmällä kaakaojauholla.",
+            "Valmista kakkupohja: sekoita öljy, kananmunat ja jogurtti keskenään. Sekoita kuivat aineet erikseen ja lisää märkien aineiden joukkoon (älä sekoita liikaa). Lisää lopuksi k[...]
             "Kaada taikinayhdistelmät uunivuokaan leivinpaperin kanssa ja paista 175 asteessa noin 20-25 minuuttia kunnes paistot ovat kypsiä.",
-            "Valmista vadelmatäyte: kuumenna vadelmat ja sokeri kattilassa kunnes pehmenevät. Sekoita perunajauho pieneen tilkkaan vettä ja lisää varovasti sekoittaen kunnes seos jähmettyy hieman. Jätä jäähtymään.",
-            "Valmista valkosuklaatäyte: sulata valkosuklaa vesihauteessa ja jätä hetkiseksi jäähtymään. Vatkaa kerma löysäksi vaahdoksi, lisää tuorejuusto, ranskankerma ja tomusokeri, sekoita tasaiseksi. Lisää jäähtynyt valkosuklaa varovasti sekoittaen.",
-            "Kokoa kakku: kostuta paistopohja halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuoreilla vadelmoilla ja halutessa valkosuklaarasteella."
+            "Valmista vadelmatäyte: kuumenna vadelmat ja sokeri kattilassa kunnes pehmenevät. Sekoita perunajauho pieneen tilkkaan vettä ja lisää varovasti sekoittaen kunnes seos jähmettyy [...]
+            "Valmista valkosuklaatäyte: sulata valkosuklaa vesihauteessa ja jätä hetkiseksi jäähtymään. Vatkaa kerma löysäksi vaahdoksi, lisää tuorejuusto, ranskankerma ja tomusokeri, sekoi[...]
+            "Kokoa kakku: kostuta paistopohja halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuore[...]
         ]
     }
 ];
@@ -456,8 +456,14 @@ function displayRecipes(recipesToShow) {
         const recipeCard = document.createElement('div');
         recipeCard.className = 'recipe-card';
 
+        // Jos image sisältää placeholder-merkinnän kuten "%s", korvataan se vakioarvolla
+        const rawImage = recipe.image || '';
+        const imageSrc = rawImage.includes('%s') ? rawImage.replace('%s', '600') : rawImage || 'https://via.placeholder.com/600x400?text=No+Image';
+
         recipeCard.innerHTML = `
-            <div class="recipe-image" style="background-image: url('${recipe.image}')"></div>
+            <div class="recipe-image-wrapper">
+                <img class="recipe-image" src="${imageSrc}" alt="${recipe.title}" onerror="this.onerror=null;this.src='https://via.placeholder.com/600x400?text=No+Image';" />
+            </div>
             <div class="recipe-category">${recipe.categories.map(cat => getCategoryName(cat)).join(', ')}</div>
             <div class="recipe-content">
                 <h3 class="recipe-title">${recipe.title}</h3>
@@ -547,10 +553,16 @@ function showRecipeInstructions(recipeId) {
         return;
     }
 
+    // Valmistele kuvalähde ja korvaa mahdollinen "%s"
+    const rawImage = recipe.image || '';
+    const imageSrc = rawImage.includes('%s') ? rawImage.replace('%s', '900') : rawImage || 'https://via.placeholder.com/900x600?text=No+Image';
+
     // Luo ohjesisältö
     modalContent.innerHTML = `
         <h2>${recipe.title}</h2>
-        <div class="modal-recipe-image" style="background-image: url('${recipe.image}')"></div>
+        <div class="modal-recipe-image-wrapper">
+            <img class="modal-recipe-image" src="${imageSrc}" alt="${recipe.title}" onerror="this.onerror=null;this.src='https://via.placeholder.com/900x600?text=No+Image';" />
+        </div>
         
         <div class="ingredients-with-amounts">
             <h4>Ainekset:</h4>
