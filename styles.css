@@ -159,12 +159,14 @@ button:hover {
     border: 1px solid var(--medium-pink);
 }
 
-.recipe-image {
-    height: 180px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-}
+   .recipe-image {
+       height: 180px;
+       width: 100%;
+       object-fit: cover;
+       object-position: center;
+       display: block;
+       position: relative;
+   }
 
 .recipe-image::after {
     content: '';
@@ -403,13 +405,15 @@ button:hover {
     font-size: 0.9rem;
 }
 
-.modal-recipe-image {
-    height: 200px;
-    border-radius: 10px;
-    background-size: cover;
-    background-position: center;
-    margin: 1rem 0;
-}
+   .modal-recipe-image {
+       height: 200px;
+       width: 100%;
+       object-fit: cover;
+       object-position: center;
+       display: block;
+       border-radius: 10px;
+       margin: 1rem 0;
+   }
 
 .ingredients-with-amounts {
     background: var(--lavender);
