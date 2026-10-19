@@ -349,13 +349,13 @@ const recipes = [
             "tuoreita vadelmia koristeeksi"
         ],
         categories: ["jälkiruoka", "leivonnainen"],
-        image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+        image: "images/20260917_122339.jpg",
         instructions: [
-            "Valmista kakkupohja: sekoita öljy, kananmunat ja jogurtti keskenään. Sekoita kuivat aineet erikseen ja lisää märkien aineiden joukkoon (älä sekoita liikaa). Lisää lopuksi k[...]
+            "Valmista kakkupohja: sekoita öljy, kananmunat ja jogurtti keskenään. Sekoita kuivat aineet erikseen ja lisää märkien aineiden joukkoon (älä sekoita liikaa). Lisää lopuksi k[...]",
             "Kaada taikinayhdistelmät uunivuokaan leivinpaperin kanssa ja paista 175 asteessa noin 20-25 minuuttia kunnes paistot ovat kypsiä.",
-            "Valmista vadelmatäyte: kuumenna vadelmat ja sokeri kattilassa kunnes pehmenevät. Sekoita perunajauho pieneen tilkkaan vettä ja lisää varovasti sekoittaen kunnes seos jähmettyy [...]
-            "Valmista valkosuklaatäyte: sulata valkosuklaa vesihauteessa ja jätä hetkiseksi jäähtymään. Vatkaa kerma löysäksi vaahdoksi, lisää tuorejuusto, ranskankerma ja tomusokeri, sekoi[...]
-            "Kokoa kakku: kostuta paistopohja halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuore[...]
+            "Valmista vadelmatäyte: kuumenna vadelmat ja sokeri kattilassa kunnes pehmenevät. Sekoita perunajauho pieneen tilkkaan vettä ja lisää varovasti sekoittaen kunnes seos jähmettyy [...]",
+            "Valmista valkosuklaatäyte: sulata valkosuklaa vesihauteessa ja jätä hetkiseksi jäähtymään. Vatkaa kerma löysäksi vaahdoksi, lisää tuorejuusto, ranskankerma ja tomusokeri, sekoi[...]",
+            "Kokoa kakku: kostuta paistopohja halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuore[...]",
         ]
     }
 ];
