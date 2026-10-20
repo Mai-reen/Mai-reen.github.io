@@ -370,7 +370,7 @@ const recipes = [
             "4 rkl misotahnaa",
             "Kevätsipulia"
         ],
-        categories: ["pääruoka", "aasialainen"],
+        categories: ["aasialainen"],
         image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80",
         instructions: [
             "Liota pesemätöntä kombua kylmässä vedessä 20–30 minuuttia.",
