@@ -351,11 +351,34 @@ const recipes = [
         categories: ["jälkiruoka", "leivonnainen"],
         image: "images/20260917_122339.jpg",
         instructions: [
-            "Valmista kakkupohja: sekoita öljy, kananmunat ja jogurtti keskenään. Sekoita kuivat aineet erikseen ja lisää märkien aineiden joukkoon (älä sekoita liikaa). Lisää lopuksi k[...]",
+            "Valmista kakkupohja: sekoita öljy, kananmunat ja jogurtti keskenään. Sekoita kuivat aineet erikseen ja lisää märkien aineiden joukkoon (älä sekoita liikaa). Lisää lopuksi k[...][...]",
             "Kaada taikinayhdistelmät uunivuokaan leivinpaperin kanssa ja paista 175 asteessa noin 20-25 minuuttia kunnes paistot ovat kypsiä.",
-            "Valmista vadelmatäyte: kuumenna vadelmat ja sokeri kattilassa kunnes pehmenevät. Sekoita perunajauho pieneen tilkkaan vettä ja lisää varovasti sekoittaen kunnes seos jähmettyy [...]",
+            "Valmista vadelmatäyte: kuumenna vadelmat ja sokeri kattilassa kunnes pehmenevät. Sekoita perunajauho pieneen tilkkaan vettä ja lisää varovasti sekoittaen kunnes seos jähmettyy [...][...]",
             "Valmista valkosuklaatäyte: sulata valkosuklaa vesihauteessa ja jätä hetkiseksi jäähtymään. Vatkaa kerma löysäksi vaahdoksi, lisää tuorejuusto, ranskankerma ja tomusokeri, sekoi[...]",
-            "Kokoa kakku: kostuta paistopohja halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuore[...]",
+            "Kokoa kakku: kostuta paistopohja halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuore[... ]"
+        ]
+    },
+    {
+        id: 15,
+        title: "Misokeitto",
+        description: "15 minuuttia",
+        ingredientAmounts: [
+            "1 l vettä",
+            "1 pala kombu-merilevää (10 × 10 cm)",
+            "1–1½ tl dashijauhetta",
+            "300 g pehmeää tofua kuutioituna",
+            "4 rkl misotahnaa",
+            "Kevätsipulia"
+        ],
+        categories: ["pääruoka", "aasialainen"],
+        image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80",
+        instructions: [
+            "Liota pesemätöntä kombua kylmässä vedessä 20–30 minuuttia.",
+            "Kuumenna hitaasti ja nosta kombu pois juuri ennen kiehumista.",
+            "Lisää dashijauhe ja tofu, ja hauduta 2 minuuttia.",
+            "Ota kattila pois liedeltä. Liuota miso keittoon siivilän läpi.",
+            "Älä anna keiton kiehua enää misen lisäämisen jälkeen.",
+            "Koristele kevätsipulilla."
         ]
     }
 ];
