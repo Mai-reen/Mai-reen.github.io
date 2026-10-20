@@ -215,7 +215,7 @@ const recipes = [
             "vadelma"
         ],
         categories: ["jälkiruoka", "leivonnainen"],
-        image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=800&q=80",
+        image: "images/20260917_122339.jpg",
         instructions: [
             "Ruskista voi kattilassa matalalla lämmöllä samalla koko ajan sekoittaen.",
             "Pilko suklaa.",
