@@ -363,11 +363,11 @@ const recipes = [
         title: "Misokeitto",
         description: "15 minuuttia",
         ingredientAmounts: [
-            "1 l vettä",
-            "1 pala kombu-merilevää (10 × 10 cm)",
-            "1–1½ tl dashijauhetta",
-            "300 g pehmeää tofua kuutioituna",
-            "4 rkl misotahnaa",
+            "1l vettä",
+            "1pala kombu-merilevää (10 × 10 cm)",
+            "1–1½tl dashijauhetta",
+            "300g pehmeää tofua kuutioituna",
+            "4rkl misotahnaa",
             "Kevätsipulia"
         ],
         categories: ["aasialainen"],
