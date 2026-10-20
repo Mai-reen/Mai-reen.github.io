@@ -380,6 +380,68 @@ const recipes = [
             "Älä anna keiton kiehua enää misen lisäämisen jälkeen.",
             "Koristele kevätsipulilla."
         ]
+    },
+    {
+        id: 16,
+        title: "Uusi kasvispata",
+        description: "20–30 minuuttia",
+        ingredientAmounts: [
+            "1 valkoinen paprikka",
+            "1 sipuli",
+            "2 porkkanaa",
+            "1 dl kasvislientä",
+            "mausteet",
+            "öljy"
+        ],
+        categories: ["pääruoka", "kasvisruoka"],
+        image: "https://via.placeholder.com/600x400?text=Uusi+kasvispata",
+        instructions: [
+            "Pilko kasvikset.",
+            "Kuullota sipuli ja mausteet.",
+            "Lisää kasvikset ja kasvisliemi.",
+            "Hauduta kunnes kaikki on kypsää."
+        ]
+    },
+    {
+        id: 17,
+        title: "Uusi jälkiruoka",
+        description: "15–20 minuuttia",
+        ingredientAmounts: [
+            "2 kananmunaa",
+            "1 dl maitoa",
+            "2 rkl sokeria",
+            "1 tl vaniljasokeria",
+            "jauhoja",
+            "maustetta"
+        ],
+        categories: ["jälkiruoka", "leivonnainen"],
+        image: "https://via.placeholder.com/600x400?text=Uusi+j%C3%A4lkiruoka",
+        instructions: [
+            "Sekoita ainekset.",
+            "Paista tai kypsennä uunissa.",
+            "Anna jäähtyä ja tarjoile."
+        ]
+    },
+    {
+        id: 18,
+        title: "Uusi salaatti",
+        description: "10 minuuttia",
+        ingredientAmounts: [
+            "1 salaattia",
+            "1 kurkku",
+            "1 tomaatti",
+            "1 dl oliiveja",
+            "kastike",
+            "mausteet"
+        ],
+        categories: ["alkupala"],
+        image: "https://via.placeholder.com/600x400?text=Uusi+salaatti",
+        instructions: [
+            "Leikkaa kasvikset.",
+            "Sekoita kulhossa.",
+            "Lisää kastike ja mausteet.",
+            "Tarjoile heti."
+        ]
     }
 ];
 
