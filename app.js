@@ -433,20 +433,22 @@ const recipes = [
     },
     {
         id: 18,
-        title: "Uusi salaatti",
+        title: "Bibimbap",
         description: "10 minuuttia",
         ingredientAmounts: [
-            "1 salaattia",
-            "1 kurkku",
-            "1 tomaatti",
-            "1 dl oliiveja",
-            "kastike",
-            "mausteet"
+            "riisi",
+            "kurkku",
+            "kimchi",
+            "ituja",
+            "porkkana",
+            "liha",
+            "kananmuna"
+            "bulgogi marinadi"
         ],
         categories: ["alkupala"],
         image: "https://via.placeholder.com/600x400?text=Uusi+salaatti",
         instructions: [
-            "Leikkaa kasvikset.",
+            "Marinoi lihaa bulgogimarinadissa.",
             "Sekoita kulhossa.",
             "Lisää kastike ja mausteet.",
             "Tarjoile heti."
