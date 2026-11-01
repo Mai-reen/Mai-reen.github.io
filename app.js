@@ -174,26 +174,23 @@ const recipes = [
         title: "Kaalilaatikko",
         description: "",
         ingredientAmounts: [
-            "400g naudan jauhelihaa",
-            "1,5dl puuroriisiä",
-            "4 dl lihalientä",
-            "kerä- tai varhaiskaalia",
-            "0,5dl siirappia",
-            "1tl suolaa",
-            "1 sipuli",
-            "1tl mustapippuria",
-            "2dl kerma",
-            "1rkl öljyä"
+            "400 g jauheliha",
+            "1,5 dl puuroriisi",
+            "5 dl vesi",
+            "1 kg kerä- tai varhaiskaali",
+            "0,5 dl siirappi",
+            "1 tl suola",
+            "mausteita",
+            "1rkl öljy"
         ],
         categories: ["pääruoka"],
         image: "https://images.ctfassets.net/0yf82hjfqumz/JYrUMedqScWqqUQQ0esiU/91dbd6855cccff640e33278f7a58c09b/655df651-fade-561e-b6ee-39a010f1e869.jpg",
         instructions: [
-            "Paista jauheliha pannulla.",
-            "Lisää taco-mausteseos ja vettä ohjeen mukaan.",
-            "Lämmitä tacokuoret uunissa tai mikroaaltouunissa.",
-            "Pilko täytteet: salaatti, tomaatit, sipuli.",
-            "Raasta juusto ja laita kermaviili pöytään.",
-            "Täytä tacokuoret ja tarjoile."
+            "Silppua kaali. Kannan kovimman osan voi jättää pois.",
+            "Kuumenna vesi laakeassa kattilassa. Lisää suola ja kaalit. Sekoittele silloin tällöin. Anna kiehua puolisen tuntia.",
+            "Ruskista jauheliha. Lisää mausteet.",
+            "Voitele iso uunivuoka. Ripottele vuoan pohjalle riisit ja kaada kaaliseos liemineen vuokaan. Lisää vuoan pinnalle siirappi.",
+            "Kypsennä 200 asteessa alimmalla tasolla noin 50 minuuttia. Tarjoa puolukkahillon kanssa."
         ]
     },
     {
