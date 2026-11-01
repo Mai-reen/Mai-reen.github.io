@@ -403,7 +403,7 @@ const recipes = [
             "0,3 dl sitruunanmehu"
         ],
         categories: ["jälkiruoka", "leivonnainen"],
-        image: "https://via.placeholder.com/600x400?text=Uusi+kasvispata",
+        image: "images/20261028_122432.jpg",
         instructions: [
             "Sekoita kuivat aineet kulhossa.",
             "Lisää joukkoon rasva ja sekoita murumaiseksi.",
