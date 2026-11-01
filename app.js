@@ -355,7 +355,7 @@ const recipes = [
             "Kaada taikinayhdistelmät uunivuokaan leivinpaperin kanssa ja paista 175 asteessa noin 20-25 minuuttia kunnes paistot ovat kypsiä.",
             "Valmista vadelmatäyte: kuumenna vadelmat ja sokeri kattilassa kunnes pehmenevät. Sekoita perunajauho pieneen tilkkaan vettä ja lisää varovasti sekoittaen kunnes seos jähmettyy [...][...]",
             "Valmista valkosuklaatäyte: sulata valkosuklaa vesihauteessa ja jätä hetkiseksi jäähtymään. Vatkaa kerma löysäksi vaahdoksi, lisää tuorejuusto, ranskankerma ja tomusokeri, sekoi[...]",
-            "Kokoa kakku: kostuta paistopohja halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuore[...]
+            "Kokoa kakku: kostuta paistopohja halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuore[...]"
         ]
     },
     {
@@ -386,13 +386,19 @@ const recipes = [
         title: "Rahkamurupiirakka",
         description: "1 h",
         ingredientAmounts: [
+            "Pohja:",
             "5 dl vehnäjauho",
             "2,5 dl sokeri",
             "1 tl leivinjauhe",
             "1 tl ruokasooda",
             "1 tl vaniljasokeri",
-            "1 dl rasva"
-            
+            "1 dl rasva",
+            "Täyte:",
+            "marjat tai hedelmät",
+            "1 dl piimä",
+            "1 kananmuna",
+            "1 rkl sokeria",
+            "1 tl vaniljasokeria"
         ],
         categories: ["jälkiruoka", "leivonnainen"],
         image: "https://via.placeholder.com/600x400?text=Uusi+kasvispata",
