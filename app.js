@@ -383,23 +383,24 @@ const recipes = [
     },
     {
         id: 16,
-        title: "Uusi kasvispata",
-        description: "20–30 minuuttia",
+        title: "Rahkamurupiirakka",
+        description: "1 h",
         ingredientAmounts: [
-            "1 valkoinen paprikka",
-            "1 sipuli",
-            "2 porkkanaa",
-            "1 dl kasvislientä",
-            "mausteet",
-            "öljy"
+            "5 dl vehnäjauho",
+            "2,5 dl sokeri",
+            "1 tl leivinjauhe",
+            "1 tl ruokasooda",
+            "1 tl vaniljasokeri",
+            "1 dl rasva"
+            
         ],
-        categories: ["pääruoka", "kasvisruoka"],
+        categories: ["jälkiruoka", "leivonnainen"],
         image: "https://via.placeholder.com/600x400?text=Uusi+kasvispata",
         instructions: [
-            "Pilko kasvikset.",
-            "Kuullota sipuli ja mausteet.",
-            "Lisää kasvikset ja kasvisliemi.",
-            "Hauduta kunnes kaikki on kypsää."
+            "Sekoita kuivat aineet kulhossa.",
+            "Lisää joukkoon rasva ja sekoita murumaiseksi.",
+            "Jaa taikina kahteen osaan ja lisää piimä ja kananmuna. Tästä tulee pohja.",
+            "Tee täyte ja lisää täyte pohjan päälle, lisää myös marjat/hedelmät ja muruseos päälle, paista 200 asteessa 35-40min alatasolla."
         ]
     },
     {
