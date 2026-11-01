@@ -327,6 +327,7 @@ const recipes = [
         title: "Vadelma-valkosuklaakakku",
         description: "noin 60 minuuttia",
         ingredientAmounts: [
+            "Pohja:",
             "0,75dl rypsiöljyä",
             "2 kananmunaa",
             "1,5dl maustamatonta jogurttia",
@@ -338,24 +339,26 @@ const recipes = [
             "1tl leivinjauhetta",
             "Ripaus suolaa",
             "1,25dl kuumaa vettä",
+            "Vadelmatäyte:",
             "250g pakastevadelmia",
             "1-2rkl sokeria (vadelmatäytteeseen)",
             "1,5tl perunajauhoja",
+            "Valkosuklaatäyte:",
             "150g valkosuklaata",
-            "0,5dl vispikermaa",
-            "400g maustamatonta tuorejuustoa",
-            "50g ranskankermaa",
+            "1,5dl vispikermaa",
+            "200g maustamatonta tuorejuustoa",
+            "100g ranskankermaa",
             "0,5dl tomusokeria",
             "tuoreita vadelmia koristeeksi"
         ],
         categories: ["jälkiruoka", "leivonnainen"],
         image: "images/20260917_122339.jpg",
         instructions: [
-            "Valmista kakkupohja: sekoita öljy, kananmunat ja jogurtti keskenään. Sekoita kuivat aineet erikseen ja lisää märkien aineiden joukkoon (älä sekoita liikaa). Lisää lopuksi k[...]",
+            "Valmista kakkupohja: sekoita öljy, kananmunat ja jogurtti keskenään. Sekoita kuivat aineet erikseen ja lisää märkien aineiden joukkoon (älä sekoita liikaa). Lisää lopuksi joukkoon kuuma vesi.",
             "Kaada taikinayhdistelmät uunivuokaan leivinpaperin kanssa ja paista 175 asteessa noin 20-25 minuuttia kunnes paistot ovat kypsiä.",
-            "Valmista vadelmatäyte: kuumenna vadelmat ja sokeri kattilassa kunnes pehmenevät. Sekoita perunajauho pieneen tilkkaan vettä ja lisää varovasti sekoittaen kunnes seos jähmettyy [...][...]",
-            "Valmista valkosuklaatäyte: sulata valkosuklaa vesihauteessa ja jätä hetkiseksi jäähtymään. Vatkaa kerma löysäksi vaahdoksi, lisää tuorejuusto, ranskankerma ja tomusokeri, sekoi[...]",
-            "Kokoa kakku: kostuta paistopohja halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuore[...]"
+            "Valmista vadelmatäyte: kuumenna vadelmat ja sokeri kattilassa kunnes pehmenevät. Sekoita perunajauho pieneen tilkkaan vettä ja lisää varovasti sekoittaen kunnes seos jähmettyy. Ota pois liedeltä ja anna jäähtyä.",
+            "Valmista valkosuklaatäyte: sulata valkosuklaa vesihauteessa ja jätä hetkeksi jäähtymään. Vatkaa kerma löysäksi vaahdoksi, lisää tuorejuusto, ranskankerma ja tomusokeri, vatkaa keskenään.",
+            "Kokoa kakku: kostuta paistopohja halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuoreilla vadelmilla ja suklaarouheella."
         ]
     },
     {
