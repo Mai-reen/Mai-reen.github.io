@@ -351,11 +351,11 @@ const recipes = [
         categories: ["jälkiruoka", "leivonnainen"],
         image: "images/20260917_122339.jpg",
         instructions: [
-            "Valmista kakkupohja: sekoita öljy, kananmunat ja jogurtti keskenään. Sekoita kuivat aineet erikseen ja lisää märkien aineiden joukkoon (älä sekoita liikaa). Lisää lopuksi k[...][...]",
+            "Valmista kakkupohja: sekoita öljy, kananmunat ja jogurtti keskenään. Sekoita kuivat aineet erikseen ja lisää märkien aineiden joukkoon (älä sekoita liikaa). Lisää lopuksi k[...]",
             "Kaada taikinayhdistelmät uunivuokaan leivinpaperin kanssa ja paista 175 asteessa noin 20-25 minuuttia kunnes paistot ovat kypsiä.",
             "Valmista vadelmatäyte: kuumenna vadelmat ja sokeri kattilassa kunnes pehmenevät. Sekoita perunajauho pieneen tilkkaan vettä ja lisää varovasti sekoittaen kunnes seos jähmettyy [...][...]",
             "Valmista valkosuklaatäyte: sulata valkosuklaa vesihauteessa ja jätä hetkiseksi jäähtymään. Vatkaa kerma löysäksi vaahdoksi, lisää tuorejuusto, ranskankerma ja tomusokeri, sekoi[...]",
-            "Kokoa kakku: kostuta paistopohja halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuore[... ]"
+            "Kokoa kakku: kostuta paistopohja halutessasi. Levitä puolet valkosuklaatäytteestä ensimmäisen pohjan päälle, lisää puolet vadelmista. Aseta toinen pohja ja toista. Koristele tuore[...]
         ]
     },
     {
@@ -458,9 +458,65 @@ const filterBtns = document.querySelectorAll('.filter-btn');
 let currentFilter = 'kaikki';
 let currentSearch = '';
 
+function escapeHtml(value) {
+    return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+function normalizeIngredientEntry(entry) {
+    if (entry && typeof entry === 'object' && !Array.isArray(entry)) {
+        if (entry.type === 'section' || entry.section || entry.label || entry.title) {
+            return {
+                type: 'section',
+                label: (entry.label || entry.title || entry.name || '').trim()
+            };
+        }
+
+        const raw = (entry.raw || [entry.amount, entry.name].filter(Boolean).join(' ')).trim();
+        return {
+            type: 'ingredient',
+            value: raw
+        };
+    }
+
+    const text = String(entry || '').trim();
+    if (!text) {
+        return { type: 'ingredient', value: '' };
+    }
+
+    if (text.endsWith(':') || /^\[(.*)\]$/.test(text) || /^\{(.*)\}$/.test(text)) {
+        return {
+            type: 'section',
+            label: text.replace(/^\[|\]$|^\{|\}$|:$/g, '').trim()
+        };
+    }
+
+    if (/^\s*(täyte|kastike|pohja|kuorrute|täytteet|kastikkeet|marinadi|mausteseos|liemi|muroseos|muru)\s*:?\s*$/i.test(text)) {
+        return {
+            type: 'section',
+            label: text.replace(/:$/, '').trim()
+        };
+    }
+
+    return { type: 'ingredient', value: text };
+}
+
+function isIngredientSection(entry) {
+    return normalizeIngredientEntry(entry).type === 'section';
+}
+
 // Helper: jäsentää ainesosan määrän ja nimen
 function parseIngredient(str) {
-    const raw = (str || '').trim();
+    const normalized = normalizeIngredientEntry(str);
+    if (normalized.type === 'section') {
+        return { name: '', amount: '', raw: '' };
+    }
+
+    const raw = (normalized.value || '').trim();
     if (!raw) return { name: '', amount: '', raw: '' };
     const tokens = raw.split(/\s+/);
     // jos ensimmäinen token sisältää numeron, pidetään se määränä
@@ -608,9 +664,11 @@ function applyFilters() {
         filteredRecipes = filteredRecipes.filter(recipe => 
             (recipe.title || '').toLowerCase().includes(currentSearch) ||
             (recipe.description || '').toLowerCase().includes(currentSearch) ||
-            (Array.isArray(recipe.ingredientAmounts) && recipe.ingredientAmounts.some(ingredient => 
-                ingredient.toLowerCase().includes(currentSearch)
-            ))
+            (Array.isArray(recipe.ingredientAmounts) && recipe.ingredientAmounts.some(ingredient => {
+                const normalized = normalizeIngredientEntry(ingredient);
+                const target = normalized.type === 'section' ? normalized.label : normalized.value;
+                return (target || '').toLowerCase().includes(currentSearch);
+            }))
         );
     }
 
@@ -634,7 +692,12 @@ function showRecipeInstructions(recipeId) {
 
     // Jos modal ei ole määritelty, näytetään yksinkertainen alert-teksti varalta
     if (!modal || !modalContent) {
-        let text = recipe.title + "\n\nAinekset:\n" + (recipe.ingredientAmounts || []).join('\n') + "\n\nOhjeet:\n" + (recipe.instructions || []).join('\n');
+        const visibleIngredients = (recipe.ingredientAmounts || [])
+            .filter(item => !isIngredientSection(item))
+            .map(item => normalizeIngredientEntry(item).value)
+            .join('\n');
+
+        let text = recipe.title + "\n\nAinekset:\n" + visibleIngredients + "\n\nOhjeet:\n" + (recipe.instructions || []).join('\n');
         alert(text);
         return;
     }
@@ -645,15 +708,21 @@ function showRecipeInstructions(recipeId) {
 
     // Luo ohjesisältö
     modalContent.innerHTML = `
-        <h2>${recipe.title}</h2>
+        <h2>${escapeHtml(recipe.title)}</h2>
         <div class="modal-recipe-image-wrapper">
-            <img class="modal-recipe-image" src="${imageSrc}" alt="${recipe.title}" onerror="this.onerror=null;this.src='https://via.placeholder.com/900x600?text=No+Image';" />
+            <img class="modal-recipe-image" src="${imageSrc}" alt="${escapeHtml(recipe.title)}" onerror="this.onerror=null;this.src='https://via.placeholder.com/900x600?text=No+Image';" />
         </div>
         
         <div class="ingredients-with-amounts">
             <h4>Ainekset:</h4>
             <ul class="amount-list">
-                ${ (recipe.ingredientAmounts || []).map(amount => `<li>${amount}</li>`).join('') }
+                ${ (recipe.ingredientAmounts || []).map(entry => {
+                    const normalized = normalizeIngredientEntry(entry);
+                    if (normalized.type === 'section') {
+                        return `<li class="ingredient-section"><strong>${escapeHtml(normalized.label)}</strong></li>`;
+                    }
+                    return `<li>${escapeHtml(normalized.value)}</li>`;
+                }).join('') }
             </ul>
         </div>
         
@@ -661,7 +730,7 @@ function showRecipeInstructions(recipeId) {
             <h3>Valmistusohje:</h3>
             <ol class="instruction-steps">
                 ${ (recipe.instructions || []).map(instruction => `
-                    <li class="instruction-step">${instruction}</li>
+                    <li class="instruction-step">${escapeHtml(instruction)}</li>
                 `).join('') }
             </ol>
         </div>
@@ -690,8 +759,11 @@ function addRecipeToGroceryList(recipeId) {
     // Hae nykyinen ostoslista localStorage:sta (objektit)
     let currentList = loadGroceryFromStorage();
 
-    recipe.ingredientAmounts.forEach(ingredientWithAmount => {
-        const parsed = parseIngredient(ingredientWithAmount);
+    recipe.ingredientAmounts.forEach(entry => {
+        const normalized = normalizeIngredientEntry(entry);
+        if (normalized.type === 'section') return;
+
+        const parsed = parseIngredient(normalized.value);
         const newName = parsed.name.trim().toLowerCase();
 
         const existingIndex = currentList.findIndex(item => (item.name || '').trim().toLowerCase() === newName);
