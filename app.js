@@ -442,7 +442,7 @@ const recipes = [
             "ituja",
             "porkkana",
             "liha",
-            "kananmuna"
+            "kananmuna",
             "bulgogi marinadi"
         ],
         categories: ["alkupala"],
